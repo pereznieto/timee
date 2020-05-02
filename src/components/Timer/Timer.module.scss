@@ -1,0 +1,36 @@
+.timer {
+  margin-top: 30px;
+}
+
+.time {
+  padding: 20px;
+  background-color: #ddd;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.running {
+  background-color: lightgreen;
+}
+
+.seconds,
+.decimals {
+  display: inline-block;
+}
+
+.seconds {
+  width: 80px;
+  font-size: 60px;
+  text-align: right;
+}
+
+.point {
+  font-size: 40px;
+}
+
+.decimals {
+  width: 40px;
+  font-size: 40px;
+  text-align: left;
+}
