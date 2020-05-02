@@ -21,6 +21,7 @@ const Timer = () => {
     if (timeLeft !== duration) {
       setTimeLeft(duration)
     }
+    // eslint-disable-next-line
   }, [duration])
 
   useInterval(
