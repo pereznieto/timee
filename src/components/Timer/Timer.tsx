@@ -11,6 +11,7 @@ const Timer = () => {
   const [isRunning, setIsRunning] = useState<boolean>(false)
   const [seconds, decimals] = splitSeconds(timeLeft)
   const percentageElapsed = 100 - (timeLeft * 100) / INITIAL_TIME
+  const shouldShowProgress = timeLeft !== INITIAL_TIME
 
   const pauseOrPlay = () => {
     if (timeLeft === 0) {
@@ -32,13 +33,15 @@ const Timer = () => {
 
   const progressStyle = {
     width: `${percentageElapsed}%`,
-    animation: isRunning ? `redden ${INITIAL_TIME / 1000}s ease-out` : '',
+    animation: `redden ${INITIAL_TIME / 1000}s forwards ease-out`,
   }
 
   return (
     <div className={styles.timer}>
       <div className={styles.time} onClick={pauseOrPlay}>
-        <div className={styles.progress} style={progressStyle} />
+        {shouldShowProgress && (
+          <div className={styles.progress} style={progressStyle} />
+        )}
         <div className={styles.numberWrapper}>
           <span className={styles.seconds}>{seconds}</span>
           <span className={styles.point}>.</span>
