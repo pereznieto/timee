@@ -3,40 +3,42 @@ import styles from './Timer.module.scss'
 import { splitSeconds } from '../../utils/parse'
 import useInterval from '../../utils/useInterval'
 
-const INTERVAL_SPEED = 10
+const TICK_SPEED = 10
 
 const Timer = () => {
   const INITIAL_TIME = 30_000
-  const [remainingTime, setRemainingTime] = useState<number>(INITIAL_TIME)
-  const [isTimerRunning, setIsTimerRunning] = useState<boolean>(false)
-  const [seconds, decimals] = splitSeconds(remainingTime)
-  const percentageElapsed = 100 - (remainingTime * 100) / INITIAL_TIME
+  const [timeLeft, setTimeLeft] = useState<number>(INITIAL_TIME)
+  const [isRunning, setIsRunning] = useState<boolean>(false)
+  const [seconds, decimals] = splitSeconds(timeLeft)
+  const percentageElapsed = 100 - (timeLeft * 100) / INITIAL_TIME
 
   const pauseOrPlay = () => {
-    if (remainingTime === 0) {
-      setRemainingTime(INITIAL_TIME)
+    if (timeLeft === 0) {
+      setTimeLeft(INITIAL_TIME)
     }
-    setIsTimerRunning((isCurrentlyRunning) => !isCurrentlyRunning)
+    setIsRunning((isCurrentlyRunning) => !isCurrentlyRunning)
   }
 
   useInterval(
     () => {
-      if (remainingTime > 0) {
-        setRemainingTime((timeRemaining) => timeRemaining - INTERVAL_SPEED)
+      if (timeLeft > 0) {
+        setTimeLeft((timeRemaining) => timeRemaining - TICK_SPEED)
       } else {
-        setIsTimerRunning(false)
+        setIsRunning(false)
       }
     },
-    isTimerRunning ? INTERVAL_SPEED : null
+    isRunning ? TICK_SPEED : null
   )
+
+  const progressStyle = {
+    width: `${percentageElapsed}%`,
+    animation: isRunning ? `redden ${INITIAL_TIME / 1000}s ease-out` : '',
+  }
 
   return (
     <div className={styles.timer}>
       <div className={styles.time} onClick={pauseOrPlay}>
-        <div
-          className={styles.progress}
-          style={{ width: `${percentageElapsed}%` }}
-        />
+        <div className={styles.progress} style={progressStyle} />
         <div className={styles.numberWrapper}>
           <span className={styles.seconds}>{seconds}</span>
           <span className={styles.point}>.</span>

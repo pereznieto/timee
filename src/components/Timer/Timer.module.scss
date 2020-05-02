@@ -8,7 +8,6 @@
   background-color: #ddd;
   cursor: pointer;
   user-select: none;
-  transition: all 0.3s ease-in-out;
 }
 
 .progress {
@@ -16,7 +15,6 @@
   top: 0;
   left: 0;
   height: 100%;
-  background-color: lightgreen;
 }
 
 .numberWrapper {
@@ -45,4 +43,15 @@
   width: 30px;
   font-size: 50px;
   text-align: left;
+}
+
+@keyframes :global(redden) {
+  0%,
+  80% {
+    background-color: #a3e4d7;
+  }
+  90%,
+  100% {
+    background-color: #f5b7b1;
+  }
 }
