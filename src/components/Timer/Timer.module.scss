@@ -1,12 +1,17 @@
 .timer {
   margin-top: 30px;
+  cursor: pointer;
+}
+
+.helperText {
+  margin-bottom: 15px;
+  color: #888;
 }
 
 .time {
   position: relative;
   height: 150px;
   background-color: #ddd;
-  cursor: pointer;
   user-select: none;
 }
 
@@ -15,6 +20,12 @@
   top: 0;
   left: 0;
   height: 100%;
+  background-color: #a3e4d7;
+  transition: background-color 1s ease-in-out;
+}
+
+.runningOut {
+  background-color: #f5b7b1;
 }
 
 .numberWrapper {
@@ -45,13 +56,25 @@
   text-align: left;
 }
 
-@keyframes :global(redden) {
-  0%,
-  80% {
-    background-color: #a3e4d7;
-  }
-  90%,
-  100% {
-    background-color: #f5b7b1;
-  }
+.duration {
+  margin-top: 30px;
+  cursor: default;
+  transition: all 0.3s ease-in-out;
+}
+
+.disabled {
+  opacity: 0;
+}
+
+.durationLabel {
+  font-weight: 700;
+}
+
+.durationInput {
+  margin: 0 10px;
+  padding: 10px 0 10px 30px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  transition: all 0.3s ease-in-out;
 }
