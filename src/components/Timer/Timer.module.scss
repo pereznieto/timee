@@ -3,15 +3,27 @@
 }
 
 .time {
-  padding: 20px;
+  position: relative;
+  height: 100px;
   background-color: #ddd;
   cursor: pointer;
   user-select: none;
   transition: all 0.3s ease-in-out;
 }
 
-.running {
+.progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
   background-color: lightgreen;
+}
+
+.numberWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .seconds,
