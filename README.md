@@ -1,6 +1,6 @@
 # Timee
 
-Interval timer for workout plans.
+Interval timer for workout plans and the likes.
 
 ## Technology
 
