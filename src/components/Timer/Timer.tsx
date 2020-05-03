@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styles from './Timer.module.scss'
-import { splitSeconds } from '../../utils/parse'
+import { splitSeconds, padZero } from '../../utils/parse'
 import useInterval from '../../utils/useInterval'
 import clsx from 'clsx'
 
@@ -58,7 +58,7 @@ const Timer = () => {
           Tap anywhere to {isRunning ? 'pause' : 'start'}
         </div>
         <div className={styles.numberWrapper}>
-          <span className={styles.seconds}>{seconds}</span>
+          <span className={styles.seconds}>{padZero(seconds)}</span>
           <span className={styles.point}>.</span>
           <span className={styles.decimals}>{decimals}</span>
         </div>
