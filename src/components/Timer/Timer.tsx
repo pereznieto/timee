@@ -81,6 +81,7 @@ const Timer = () => {
             aria-label="Duration"
             name="duration"
             type="number"
+            inputMode="numeric"
             min="0"
             max="99"
             value={padZero(seconds)}

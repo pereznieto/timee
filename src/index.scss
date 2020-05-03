@@ -11,7 +11,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Remove number input controls from Safari and Chrome */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; /* Removes leftover margin */
+}
+
+/* Remove number input controls from Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
 }
