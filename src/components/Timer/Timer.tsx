@@ -43,6 +43,24 @@ const Timer = () => {
     setIsRunning((isCurrentlyRunning) => !isCurrentlyRunning)
   }
 
+  const getHelperText = () => {
+    const tapTo = 'Tap anywhere to'
+
+    if (isRunning) {
+      return `${tapTo} pause`
+    }
+
+    if (timeLeft === 0) {
+      return `${tapTo} restart`
+    }
+
+    if (timeLeft < duration) {
+      return `${tapTo} resume`
+    }
+
+    return `${tapTo} start`
+  }
+
   return (
     <div className={styles.timerWrapper} onClick={pauseOrPlay}>
       <div className={styles.progressWrapper}>
@@ -54,9 +72,7 @@ const Timer = () => {
         )}
       </div>
       <div className={styles.timer}>
-        <div className={styles.helperText}>
-          Tap anywhere to {isRunning ? 'pause' : 'start'}
-        </div>
+        <div className={styles.helperText}>{getHelperText()}</div>
         <div className={styles.numberWrapper}>
           <span className={styles.seconds}>{padZero(seconds)}</span>
           <span className={styles.point}>.</span>
