@@ -74,33 +74,27 @@ const Timer = () => {
       <div className={styles.timer}>
         <div className={styles.helperText}>{getHelperText()}</div>
         <div className={styles.numberWrapper}>
-          <span className={styles.seconds}>{padZero(seconds)}</span>
-          <span className={styles.point}>.</span>
-          <span className={styles.decimals}>{decimals}</span>
-        </div>
-        <div
-          className={clsx(styles.duration, isRunning && styles.disabled)}
-          onClick={(event) => {
-            event.stopPropagation()
-          }}
-        >
-          <label className={styles.durationLabel} htmlFor="duration">
-            Duration:
-          </label>
           <input
-            className={styles.durationInput}
-            type="number"
-            id="duration"
+            className={styles.secondsInput}
+            title="Edit duration"
+            aria-label="Duration"
             name="duration"
+            type="number"
             min="0"
             max="99"
-            disabled={isRunning}
-            value={splitSeconds(duration)[0]}
+            value={padZero(seconds)}
             onChange={({ target: { value } }) => {
               setDuration(Number(value) * 1000)
             }}
+            onClick={(event) => {
+              if (!isRunning) {
+                event.stopPropagation()
+              }
+            }}
           />
+          <span className={styles.decimals}>.{decimals}</span>
         </div>
+        <div className={styles.footer}>This is Timee.</div>
       </div>
     </div>
   )
