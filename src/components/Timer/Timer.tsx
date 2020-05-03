@@ -44,6 +44,7 @@ const Timer = () => {
       pauseOrPlay()
       setWasSpacePressed(false)
     }
+    // eslint-disable-next-line
   }, [wasSpacePressed])
 
   useInterval(
