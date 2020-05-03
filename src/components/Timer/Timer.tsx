@@ -94,7 +94,7 @@ const Timer = () => {
           />
           <span className={styles.decimals}>.{decimals}</span>
         </div>
-        <div className={styles.footer}>This is Timee.</div>
+        <div className={styles.footer}>This is Timee</div>
       </div>
     </div>
   )
