@@ -3,6 +3,8 @@ import styles from './Timer.module.scss'
 import { splitSeconds, padZero } from '../../utils/parse'
 import useInterval from '../../utils/useInterval'
 import { playSound } from '../../utils/playSound'
+import ding from '../../assets/ding.mp3'
+import cling from '../../assets/cling.wav'
 import clsx from 'clsx'
 
 const TICK_SPEED = 10
@@ -52,11 +54,11 @@ const Timer = () => {
       if (timeLeft > 0) {
         setTimeLeft((timeRemaining) => timeRemaining - TICK_SPEED)
         if ([3_000, 2_000, 1_000].indexOf(timeLeft) > -1) {
-          playSound('cling.wav')
+          playSound(cling)
         }
       } else {
         setIsRunning(false)
-        playSound('ding.mp3')
+        playSound(ding)
       }
     },
     isRunning ? TICK_SPEED : null
