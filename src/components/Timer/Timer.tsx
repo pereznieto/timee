@@ -44,46 +44,47 @@ const Timer = () => {
   }
 
   return (
-    <div className={styles.timer} onClick={pauseOrPlay}>
-      <div className={styles.helperText}>
-        Tap to {isRunning ? 'pause' : 'start'}
-      </div>
-      <div className={styles.time}>
+    <div className={styles.timerWrapper} onClick={pauseOrPlay}>
+      <div className={styles.progressWrapper}>
         {shouldShowProgress && (
           <div
             className={clsx(styles.progress, isRunningOut && styles.runningOut)}
             style={{ width: `${percentageElapsed}%` }}
           />
         )}
+      </div>
+      <div className={styles.timer}>
+        <div className={styles.helperText}>
+          Tap anywhere to {isRunning ? 'pause' : 'start'}
+        </div>
         <div className={styles.numberWrapper}>
           <span className={styles.seconds}>{seconds}</span>
           <span className={styles.point}>.</span>
           <span className={styles.decimals}>{decimals}</span>
         </div>
-      </div>
-      <div
-        className={clsx(styles.duration, isRunning && styles.disabled)}
-        onClick={(event) => {
-          event.stopPropagation()
-        }}
-      >
-        <label className={styles.durationLabel} htmlFor="duration">
-          Duration:
-        </label>
-        <input
-          className={styles.durationInput}
-          type="number"
-          id="duration"
-          name="duration"
-          min="0"
-          max="1000"
-          disabled={isRunning}
-          value={splitSeconds(duration)[0]}
-          onChange={({ target: { value } }) => {
-            setDuration(Number(value) * 1000)
+        <div
+          className={clsx(styles.duration, isRunning && styles.disabled)}
+          onClick={(event) => {
+            event.stopPropagation()
           }}
-        />
-        <span>seconds</span>
+        >
+          <label className={styles.durationLabel} htmlFor="duration">
+            Duration:
+          </label>
+          <input
+            className={styles.durationInput}
+            type="number"
+            id="duration"
+            name="duration"
+            min="0"
+            max="99"
+            disabled={isRunning}
+            value={splitSeconds(duration)[0]}
+            onChange={({ target: { value } }) => {
+              setDuration(Number(value) * 1000)
+            }}
+          />
+        </div>
       </div>
     </div>
   )
