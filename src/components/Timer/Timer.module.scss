@@ -3,6 +3,7 @@
   width: 100vw;
   height: 100vh;
   cursor: pointer;
+  user-select: none;
 }
 
 .progressWrapper {
@@ -34,11 +35,10 @@
 .helperText {
   margin-top: 30px;
   opacity: 0.5;
-  font-weight: 700;
 }
 
-.numberWrapper {
-  user-select: none;
+.helperAction {
+  font-weight: 700;
 }
 
 .secondsInput {
@@ -85,5 +85,5 @@
 
 .footer {
   margin-bottom: 30px;
-  opacity: 0.5;
+  opacity: 0.3;
 }

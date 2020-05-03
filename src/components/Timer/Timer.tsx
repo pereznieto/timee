@@ -35,7 +35,7 @@ const Timer = () => {
     isRunning ? TICK_SPEED : null
   )
 
-  const pauseOrPlay = () => {
+  const pauseOrPlay = (): void => {
     if (timeLeft === 0) {
       setTimeLeft(duration)
     } else if (isRunning) {
@@ -43,22 +43,20 @@ const Timer = () => {
     setIsRunning((isCurrentlyRunning) => !isCurrentlyRunning)
   }
 
-  const getHelperText = () => {
-    const tapTo = 'Tap anywhere to'
-
+  const getHelperAction = (): string => {
     if (isRunning) {
-      return `${tapTo} pause`
+      return 'pause'
     }
 
     if (timeLeft === 0) {
-      return `${tapTo} restart`
+      return 'restart'
     }
 
     if (timeLeft < duration) {
-      return `${tapTo} resume`
+      return 'resume'
     }
 
-    return `${tapTo} start`
+    return 'start'
   }
 
   return (
@@ -72,8 +70,11 @@ const Timer = () => {
         )}
       </div>
       <div className={styles.timer}>
-        <div className={styles.helperText}>{getHelperText()}</div>
-        <div className={styles.numberWrapper}>
+        <div className={styles.helperText}>
+          Tap anywhere to{' '}
+          <span className={styles.helperAction}>{getHelperAction()}</span>
+        </div>
+        <div>
           <input
             className={styles.secondsInput}
             title="Edit duration"
