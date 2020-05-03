@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import styles from './App.module.scss'
 import Timer from '../../components/Timer/Timer'
 
 const App = () => {
