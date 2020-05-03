@@ -64,7 +64,11 @@ const Timer = () => {
       <div className={styles.progressWrapper}>
         {shouldShowProgress && (
           <div
-            className={clsx(styles.progress, isRunningOut && styles.runningOut)}
+            className={clsx(
+              styles.progress,
+              isRunningOut && styles.runningOut,
+              !isRunning && styles.notRunning
+            )}
             style={{ width: `${percentageElapsed}%` }}
           />
         )}
