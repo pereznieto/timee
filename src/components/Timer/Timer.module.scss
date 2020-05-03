@@ -1,18 +1,16 @@
 .timerWrapper {
   position: relative;
-  width: 100vw;
-  height: 100vh;
   cursor: pointer;
   user-select: none;
 }
 
 .progressWrapper {
   position: relative;
-  height: 100vh;
+  height: var(--app-height);
 }
 
 .progress {
-  height: 100%;
+  height: var(--app-height);
   background-color: #d5f5e3;
   transition: background-color 1s ease-in-out;
 }
