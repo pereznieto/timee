@@ -14,6 +14,7 @@ const Timer = () => {
   const [timeLeft, setTimeLeft] = useState<number>(duration)
   const [isRunning, setIsRunning] = useState<boolean>(false)
   const [seconds, decimals] = splitSeconds(timeLeft)
+  const [wasSpacePressed, setWasSpacePressed] = useState<boolean>(false)
   const percentageElapsed = 100 - (timeLeft * 100) / duration
   const shouldShowProgress = timeLeft !== duration
   const isRunningOut = timeLeft < RUNNING_OUT_MARK
@@ -24,6 +25,26 @@ const Timer = () => {
     }
     // eslint-disable-next-line
   }, [duration])
+
+  useEffect(() => {
+    window.addEventListener('keyup', upHandler)
+    return () => {
+      window.removeEventListener('keyup', upHandler)
+    }
+  }, [])
+
+  const upHandler = ({ key }: KeyboardEvent): void => {
+    if (key === ' ') {
+      setWasSpacePressed(true)
+    }
+  }
+
+  useEffect(() => {
+    if (wasSpacePressed) {
+      pauseOrPlay()
+      setWasSpacePressed(false)
+    }
+  }, [wasSpacePressed])
 
   useInterval(
     () => {
@@ -43,7 +64,6 @@ const Timer = () => {
   const pauseOrPlay = (): void => {
     if (timeLeft === 0) {
       setTimeLeft(duration)
-    } else if (isRunning) {
     }
     setIsRunning((isCurrentlyRunning) => !isCurrentlyRunning)
   }
