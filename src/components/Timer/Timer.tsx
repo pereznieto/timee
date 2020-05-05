@@ -14,7 +14,9 @@ const Timer = () => {
   const RUNNING_OUT_MARK = 4_000
   const [duration, setDuration] = useState<number>(DEFAULT_DURATION)
   const [timeLeft, setTimeLeft] = useState<number>(duration)
-  const [isRunning, setIsRunning] = useState<boolean>(false)
+  const [runningStartTime, setRunningStartTime] = useState<number | false>(
+    false
+  )
   const [seconds, decimals] = splitSeconds(timeLeft)
   const [wasSpacePressed, setWasSpacePressed] = useState<boolean>(false)
   const percentageElapsed = 100 - (timeLeft * 100) / duration
@@ -51,28 +53,38 @@ const Timer = () => {
 
   useInterval(
     () => {
+      const delta = Date.now() - (runningStartTime as number)
+      const timeElapsed = Math.floor(delta / TICK_SPEED) * TICK_SPEED
       if (timeLeft > 0) {
-        setTimeLeft((timeRemaining) => timeRemaining - TICK_SPEED)
+        setTimeLeft(duration - timeElapsed)
         if ([3_000, 2_000, 1_000].indexOf(timeLeft) > -1) {
           playSound(cling)
         }
       } else {
-        setIsRunning(false)
+        setRunningStartTime(false)
         playSound(ding)
       }
     },
-    isRunning ? TICK_SPEED : null
+    runningStartTime ? TICK_SPEED : null
   )
 
   const pauseOrPlay = (): void => {
     if (timeLeft === 0) {
       setTimeLeft(duration)
+      setRunningStartTime(Date.now())
+    } else {
+      if (timeLeft === duration) {
+        setRunningStartTime(Date.now())
+      } else {
+        setRunningStartTime((isCurrentlyRunning) =>
+          isCurrentlyRunning ? false : Date.now() - (duration - timeLeft)
+        )
+      }
     }
-    setIsRunning((isCurrentlyRunning) => !isCurrentlyRunning)
   }
 
   const getHelperAction = (): string => {
-    if (isRunning) {
+    if (runningStartTime) {
       return 'pause'
     }
 
@@ -95,7 +107,7 @@ const Timer = () => {
             className={clsx(
               styles.progress,
               isRunningOut && styles.runningOut,
-              !isRunning && styles.notRunning
+              !runningStartTime && styles.notRunning
             )}
             style={{ width: `${percentageElapsed}%` }}
           />
@@ -121,7 +133,7 @@ const Timer = () => {
               setDuration(Number(value) * 1000)
             }}
             onClick={(event) => {
-              if (!isRunning) {
+              if (!runningStartTime) {
                 event.stopPropagation()
               }
             }}
