@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Timer.module.scss'
 import { splitSeconds, padZero } from '../../utils/parse'
 import useInterval from '../../utils/useInterval'
-import dingSource from '../../assets/ding.mp3'
-import clingSource from '../../assets/cling.wav'
+import ding from '../../assets/ding.mp3'
+import cling from '../../assets/cling.wav'
+import useSound from 'use-sound'
 import clsx from 'clsx'
 
 const TICK_SPEED = 10
@@ -19,8 +20,8 @@ const Timer = () => {
   const percentageElapsed = 100 - (timeLeft * 100) / duration
   const shouldShowProgress = timeLeft !== duration
   const isRunningOut = timeLeft < RUNNING_OUT_MARK
-  const ding = useRef(new Audio(dingSource))
-  const cling = useRef(new Audio(clingSource))
+  const [playDing] = useSound(ding)
+  const [playCling] = useSound(cling)
 
   useEffect(() => {
     const upHandler = ({ key }: KeyboardEvent): void => {
@@ -53,7 +54,7 @@ const Timer = () => {
 
   useEffect(() => {
     if (startTime && [3, 2, 1].indexOf(seconds) > -1) {
-      cling.current.play().catch(alert)
+      playCling()
     }
     // eslint-disable-next-line
   }, [seconds])
@@ -66,7 +67,7 @@ const Timer = () => {
         setTimeLeft(duration - timeElapsed)
       } else {
         setStartTime(false)
-        ding.current.play().catch(alert)
+        playDing()
       }
     },
     startTime ? TICK_SPEED : null
