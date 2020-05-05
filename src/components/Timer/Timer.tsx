@@ -21,7 +21,7 @@ const Timer = () => {
   const shouldShowProgress = timeLeft !== duration
   const isRunningOut = timeLeft < RUNNING_OUT_MARK
   const [playDing] = useSound(ding)
-  const [playCling] = useSound(cling)
+  const [playCling] = useSound(cling, { interrupt: true })
 
   useEffect(() => {
     const upHandler = ({ key }: KeyboardEvent): void => {
