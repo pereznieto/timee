@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styles from './Timer.module.scss'
 import { splitSeconds, padZero } from '../../utils/parse'
 import useInterval from '../../utils/useInterval'
@@ -17,11 +17,12 @@ const Timer = () => {
   const [runningStartTime, setRunningStartTime] = useState<number | false>(
     false
   )
-  const [seconds, decimals] = splitSeconds(timeLeft)
   const [wasSpacePressed, setWasSpacePressed] = useState<boolean>(false)
+  const seconds = splitSeconds(timeLeft)
   const percentageElapsed = 100 - (timeLeft * 100) / duration
   const shouldShowProgress = timeLeft !== duration
   const isRunningOut = timeLeft < RUNNING_OUT_MARK
+  const dingAudio = useRef(new Audio(ding))
 
   useEffect(() => {
     if (timeLeft !== duration) {
@@ -62,7 +63,7 @@ const Timer = () => {
         }
       } else {
         setRunningStartTime(false)
-        playSound(ding)
+        dingAudio.current.play().catch(alert)
       }
     },
     runningStartTime ? TICK_SPEED : null
@@ -118,28 +119,25 @@ const Timer = () => {
           Tap anywhere to{' '}
           <span className={styles.helperAction}>{getHelperAction()}</span>
         </div>
-        <div>
-          <input
-            className={styles.secondsInput}
-            title="Edit duration"
-            aria-label="Duration"
-            name="duration"
-            type="number"
-            inputMode="numeric"
-            min="0"
-            max="99"
-            value={padZero(seconds)}
-            onChange={({ target: { value } }) => {
-              setDuration(Number(value) * 1000)
-            }}
-            onClick={(event) => {
-              if (!runningStartTime) {
-                event.stopPropagation()
-              }
-            }}
-          />
-          <span className={styles.decimals}>.{decimals}</span>
-        </div>
+        <input
+          className={styles.secondsInput}
+          title="Edit duration"
+          aria-label="Duration"
+          name="duration"
+          type="number"
+          inputMode="numeric"
+          min="0"
+          max="999"
+          value={padZero(seconds)}
+          onChange={({ target: { value } }) => {
+            setDuration(Number(value) * 1000)
+          }}
+          onClick={(event) => {
+            if (!runningStartTime) {
+              event.stopPropagation()
+            }
+          }}
+        />
         <div className={styles.footer}>This is Timee</div>
       </div>
     </div>
