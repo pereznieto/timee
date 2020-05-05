@@ -7,24 +7,24 @@ describe('parse utils', () => {
       expect(seconds).toEqual(30)
     })
 
-    it('should return 15 seconds when the input is 15_789', () => {
+    it('should return 16 seconds when the input is 15_789', () => {
       const seconds = splitSeconds(15_789)
-      expect(seconds).toEqual(15)
+      expect(seconds).toEqual(16)
     })
 
-    it('should return 189 seconds when the input is 189_123', () => {
+    it('should return 190 seconds when the input is 189_123', () => {
       const seconds = splitSeconds(189_123)
-      expect(seconds).toEqual(189)
+      expect(seconds).toEqual(190)
     })
 
-    it('should return 0 seconds when the input is 1', () => {
+    it('should return 1 seconds when the input is 1', () => {
       const seconds = splitSeconds(1)
-      expect(seconds).toEqual(0)
+      expect(seconds).toEqual(1)
     })
 
-    it('should return 0 seconds when the input is 100', () => {
+    it('should return 1 seconds when the input is 100', () => {
       const seconds = splitSeconds(100)
-      expect(seconds).toEqual(0)
+      expect(seconds).toEqual(1)
     })
 
     it('should return 0 seconds when the input is 0', () => {

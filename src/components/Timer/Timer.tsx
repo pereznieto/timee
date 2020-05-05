@@ -70,6 +70,7 @@ const Timer = () => {
   )
 
   const pauseOrPlay = (): void => {
+    // dingAudio.current.play()
     if (timeLeft === 0) {
       setTimeLeft(duration)
       setRunningStartTime(Date.now())
