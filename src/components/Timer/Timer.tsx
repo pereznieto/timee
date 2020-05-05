@@ -7,12 +7,34 @@ import cling from '../../assets/cling.wav'
 import useSound from 'use-sound'
 import clsx from 'clsx'
 
+export interface Set {
+  name: string
+  duration: number
+}
+
+interface Props {
+  exercises?: Set[]
+}
+
 const TICK_SPEED = 10
 
-const Timer = () => {
+const Timer = ({ exercises }: Props) => {
   const DEFAULT_DURATION = 30_000
   const RUNNING_OUT_MARK = 3_000
-  const [duration, setDuration] = useState<number>(DEFAULT_DURATION)
+
+  const hasExercises = Boolean(exercises?.length)
+  const [exerciseIndex, setExerciseIndex] = useState<number>(0)
+  const currentExercise = hasExercises ? exercises![exerciseIndex] : undefined
+  const hasNextExercise = Boolean(
+    currentExercise && exerciseIndex < exercises!.length - 1
+  )
+  const nextExercise = hasNextExercise
+    ? exercises![exerciseIndex + 1]
+    : undefined
+
+  const [duration, setDuration] = useState<number>(
+    currentExercise?.duration || DEFAULT_DURATION
+  )
   const [timeLeft, setTimeLeft] = useState<number>(duration)
   const [startTime, setStartTime] = useState<number | false>(false)
   const [wasKeyPressed, setWasKeyPressed] = useState<boolean>(false)
@@ -22,6 +44,7 @@ const Timer = () => {
   const isRunningOut = timeLeft < RUNNING_OUT_MARK
   const [playDing] = useSound(ding)
   const [playCling] = useSound(cling, { interrupt: true })
+  const isDone = hasExercises ? !hasNextExercise && !timeLeft : null
 
   useEffect(() => {
     const upHandler = ({ key }: KeyboardEvent): void => {
@@ -66,8 +89,14 @@ const Timer = () => {
       if (timeLeft > 0) {
         setTimeLeft(duration - timeElapsed)
       } else {
-        setStartTime(false)
         playDing()
+        if (hasNextExercise) {
+          setTimeLeft(nextExercise!.duration)
+          setStartTime(Date.now())
+          setExerciseIndex((currentIndex) => currentIndex + 1)
+        } else {
+          setStartTime(false)
+        }
       }
     },
     startTime ? TICK_SPEED : null
@@ -121,6 +150,12 @@ const Timer = () => {
           Tap anywhere to{' '}
           <span className={styles.helperAction}>{getHelperAction()}</span>
         </div>
+        {currentExercise &&
+          (isDone ? (
+            <div className={styles.currentExercise}>Done!</div>
+          ) : (
+            <div className={styles.currentExercise}>{currentExercise.name}</div>
+          ))}
         <input
           className={styles.secondsInput}
           title="Edit duration"
@@ -140,6 +175,15 @@ const Timer = () => {
             }
           }}
         />
+        {hasExercises &&
+          (isDone ? (
+            <div className={styles.nextExercise} />
+          ) : (
+            <div className={styles.nextExercise}>
+              <span className={styles.upNext}>Up next:</span>{' '}
+              {nextExercise?.name || 'Done!'}
+            </div>
+          ))}
         <div className={styles.footer}>This is Timee</div>
       </div>
     </div>
