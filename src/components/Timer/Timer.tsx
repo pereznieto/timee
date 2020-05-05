@@ -150,12 +150,11 @@ const Timer = ({ exercises }: Props) => {
           Tap anywhere to{' '}
           <span className={styles.helperAction}>{getHelperAction()}</span>
         </div>
-        {currentExercise &&
-          (isDone ? (
-            <div className={styles.currentExercise}>Done!</div>
-          ) : (
-            <div className={styles.currentExercise}>{currentExercise.name}</div>
-          ))}
+        {currentExercise && (
+          <div className={styles.currentExercise}>
+            {isDone ? 'Done!' : currentExercise.name}
+          </div>
+        )}
         <input
           className={styles.secondsInput}
           title="Edit duration"
@@ -175,15 +174,16 @@ const Timer = ({ exercises }: Props) => {
             }
           }}
         />
-        {hasExercises &&
-          (isDone ? (
-            <div className={styles.nextExercise} />
-          ) : (
-            <div className={styles.nextExercise}>
-              <span className={styles.upNext}>Up next:</span>{' '}
-              {nextExercise?.name || 'Done!'}
-            </div>
-          ))}
+        {hasExercises && (
+          <div className={styles.nextExercise}>
+            {isDone ? null : (
+              <span>
+                <span className={styles.upNext}>Up next: </span>
+                {nextExercise?.name || 'Done!'}
+              </span>
+            )}
+          </div>
+        )}
         <div className={styles.footer}>This is Timee</div>
       </div>
     </div>
