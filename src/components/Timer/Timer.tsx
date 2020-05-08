@@ -91,6 +91,7 @@ const Timer = ({ exercises }: Props) => {
       } else {
         playDing()
         if (hasNextExercise) {
+          setDuration(nextExercise!.duration)
           setTimeLeft(nextExercise!.duration)
           setStartTime(Date.now())
           setExerciseIndex((currentIndex) => currentIndex + 1)
@@ -180,6 +181,11 @@ const Timer = ({ exercises }: Props) => {
               <span>
                 <span className={styles.upNext}>Up next: </span>
                 {nextExercise?.name || 'Done!'}
+                <span className={styles.nextDuration}>
+                  {nextExercise?.duration
+                    ? ` (${splitSeconds(nextExercise.duration)})`
+                    : ''}
+                </span>
               </span>
             )}
           </div>
