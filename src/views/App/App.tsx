@@ -16,284 +16,86 @@ const App = () => {
     }
   }, [])
 
-  // const sampleExercises: Set[] = [
-  //   {
-  //     name: 'Get ready!',
-  //     duration: 5_000,
-  //   },
-  //   {
-  //     name: '1. Legs Down Hold',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Leg Raises',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Leg Flutters',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Bicycles',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Seated In And Outs',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Russian Twists',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Boat Hold',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Star Crunches',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Plank Side Hold – Right',
-  //     duration: 30_000,
-  //   },
-  //   {
-  //     name: '1. Plank Side Hold – Left',
-  //     duration: 30_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Plank Knees to Elbows',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '1. Plank Up & Down',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Long Rest',
-  //     duration: 60_000,
-  //   },
-  //   {
-  //     name: '2. Legs Down Hold',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Leg Raises',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Leg Flutters',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Bicycles',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Seated In And Outs',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Russian Twists',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Boat Hold',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Star Crunches',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Plank Side Hold – Right',
-  //     duration: 30_000,
-  //   },
-  //   {
-  //     name: '2. Plank Side Hold – Left',
-  //     duration: 30_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Plank Knees to Elbows',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '2. Plank Up & Down',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Long Rest',
-  //     duration: 60_000,
-  //   },
-  //   {
-  //     name: '3. Legs Down Hold',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Leg Raises',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Leg Flutters',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Bicycles',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Seated In And Outs',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Russian Twists',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Boat Hold',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Star Crunches',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Plank Side Hold – Right',
-  //     duration: 30_000,
-  //   },
-  //   {
-  //     name: '3. Plank Side Hold – Left',
-  //     duration: 30_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Plank Knees to Elbows',
-  //     duration: 45_000,
-  //   },
-  //   {
-  //     name: 'Rest',
-  //     duration: 15_000,
-  //   },
-  //   {
-  //     name: '3. Plank Up & Down',
-  //     duration: 45_000,
-  //   },
-  // ]
+  const sampleSet: Set[] = [
+    {
+      name: 'High Knee Runs',
+      duration: 45_000,
+    },
+    {
+      name: 'Rest',
+      duration: 15_000,
+    },
+    {
+      name: 'Switching Mountain Climbers',
+      duration: 45_000,
+    },
+    {
+      name: 'Rest',
+      duration: 15_000,
+    },
+    {
+      name: 'Jumping Jacks',
+      duration: 45_000,
+    },
+    {
+      name: 'Rest',
+      duration: 15_000,
+    },
+    {
+      name: 'Butt Kicks',
+      duration: 45_000,
+    },
+    {
+      name: 'Rest',
+      duration: 15_000,
+    },
+    {
+      name: 'In & Out (Open & Close)',
+      duration: 45_000,
+    },
+    {
+      name: 'Rest',
+      duration: 15_000,
+    },
+    {
+      name: 'Burpees',
+      duration: 45_000,
+    },
+    {
+      name: 'Rest',
+      duration: 15_000,
+    },
+    {
+      name: 'Bicycles',
+      duration: 45_000,
+    },
+    {
+      name: 'Rest',
+      duration: 15_000,
+    },
+    {
+      name: 'Side to Side Explosive Squats',
+      duration: 45_000,
+    },
+  ]
+
+  const sampleExercises: Set[] = [
+    {
+      name: 'Get ready!',
+      duration: 5_000,
+    },
+    ...sampleSet,
+    {
+      name: 'Long Rest',
+      duration: 60_000,
+    },
+    ...sampleSet,
+    {
+      name: 'Long Rest',
+      duration: 60_000,
+    },
+    ...sampleSet,
+  ]
 
   return (
     <div>

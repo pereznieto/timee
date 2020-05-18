@@ -82,6 +82,15 @@
   opacity: 0.5;
 }
 
+.exerciseAfterNext {
+  margin-top: 10px;
+  font-size: 30px;
+
+  & .nextDuration {
+    font-size: 25px;
+  }
+}
+
 .nextDuration {
   opacity: 0.5;
   font-size: 30px;

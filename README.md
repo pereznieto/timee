@@ -6,6 +6,15 @@ Interval timer for workout plans and the likes.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Future features
+* Add custom workouts through the app
+* Different visual style for Rest
+* Add ability to do untimed exercises as part of a set
+* Repeat sets
+* Whole workout time tracker
+* Total time displayed at the beginning of workout
+* Up next: more than one
+
 ## Available Scripts
 
 In the project directory, you can run:

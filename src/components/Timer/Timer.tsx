@@ -28,8 +28,14 @@ const Timer = ({ exercises }: Props) => {
   const hasNextExercise = Boolean(
     currentExercise && exerciseIndex < exercises!.length - 1
   )
+  const hasExerciseAfterNext = Boolean(
+    hasNextExercise && exerciseIndex < exercises!.length
+  )
   const nextExercise = hasNextExercise
     ? exercises![exerciseIndex + 1]
+    : undefined
+  const exerciseAfterNext = hasExerciseAfterNext
+    ? exercises![exerciseIndex + 2]
     : undefined
 
   const [duration, setDuration] = useState<number>(
@@ -178,15 +184,28 @@ const Timer = ({ exercises }: Props) => {
         {hasExercises && (
           <div className={styles.nextExercise}>
             {isDone ? null : (
-              <span>
-                <span className={styles.upNext}>Up next: </span>
-                {nextExercise?.name || 'Done!'}
-                <span className={styles.nextDuration}>
-                  {nextExercise?.duration
-                    ? ` (${splitSeconds(nextExercise.duration)})`
-                    : ''}
-                </span>
-              </span>
+              <>
+                <div>
+                  <span className={styles.upNext}>Up next: </span>
+                  {nextExercise?.name || 'Done!'}
+                  <span className={styles.nextDuration}>
+                    {nextExercise?.duration
+                      ? ` (${splitSeconds(nextExercise.duration)}s)`
+                      : ''}
+                  </span>
+                </div>
+                {exerciseAfterNext && (
+                  <div className={styles.exerciseAfterNext}>
+                    <span className={styles.upNext}>Then: </span>
+                    {exerciseAfterNext?.name}
+                    <span className={styles.nextDuration}>
+                      {exerciseAfterNext?.duration
+                        ? ` (${splitSeconds(exerciseAfterNext.duration)}s)`
+                        : ''}
+                    </span>
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
