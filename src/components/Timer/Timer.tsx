@@ -43,13 +43,12 @@ const Timer = ({ exercises }: Props) => {
   const [playCling] = useSound(cling, { volume: 0.5 })
   const isDone = hasExercises ? !hasNextExercise && !timeLeft : null
 
-  const exercisesCompleted: Set[] | undefined = hasExercises ? exercises!.slice(0, exerciseIndex) : undefined
-  const totalTime: number | undefined = hasExercises ? addTotalTime(exercises!) : undefined
-  const timeElapsed: number | undefined = hasExercises
-    ? addTotalTime(exercisesCompleted!) + (duration - timeLeft)
+  const exercisesCompleted: Set[] | undefined = exercises?.slice(0, exerciseIndex)
+  const totalTime: number | undefined = addTotalTime(exercises)
+  const timeElapsed: number | undefined = exercisesCompleted
+    ? addTotalTime(exercisesCompleted)! + (duration - timeLeft)
     : undefined
-
-  console.log({ totalTime, timeElapsed })
+  const workoutProgress: number | undefined = timeElapsed && totalTime ? (timeElapsed * 100) / totalTime : undefined
 
   useEffect(() => {
     const upHandler = ({ key }: KeyboardEvent): void => {
@@ -137,6 +136,11 @@ const Timer = ({ exercises }: Props) => {
 
   return (
     <div className={styles.timerWrapper} onClick={pauseOrPlay}>
+      {workoutProgress && (
+        <div className={styles.workoutProgressWrapper}>
+          <div className={styles.workoutProgress} style={{ height: `${workoutProgress}%` }} />
+        </div>
+      )}
       <div className={styles.progressWrapper}>
         {shouldShowProgress && (
           <div

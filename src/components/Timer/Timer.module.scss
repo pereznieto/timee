@@ -4,6 +4,19 @@
   user-select: none;
 }
 
+.workoutProgressWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--app-height);
+  z-index: 1;
+}
+
+.workoutProgress {
+  width: 20px;
+  background-color: blue;
+}
+
 .progressWrapper {
   position: relative;
   height: var(--app-height);
