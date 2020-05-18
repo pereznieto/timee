@@ -49,7 +49,7 @@ const Timer = ({ exercises }: Props) => {
   const shouldShowProgress = timeLeft !== duration
   const isRunningOut = timeLeft < RUNNING_OUT_MARK
   const [playDing] = useSound(ding)
-  const [playCling] = useSound(cling, { interrupt: true })
+  const [playCling] = useSound(cling, { volume: 0.5 })
   const isDone = hasExercises ? !hasNextExercise && !timeLeft : null
 
   useEffect(() => {
