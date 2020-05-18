@@ -25,22 +25,12 @@ const Timer = ({ exercises }: Props) => {
   const hasExercises = Boolean(exercises?.length)
   const [exerciseIndex, setExerciseIndex] = useState<number>(0)
   const currentExercise = hasExercises ? exercises![exerciseIndex] : undefined
-  const hasNextExercise = Boolean(
-    currentExercise && exerciseIndex < exercises!.length - 1
-  )
-  const hasExerciseAfterNext = Boolean(
-    hasNextExercise && exerciseIndex < exercises!.length
-  )
-  const nextExercise = hasNextExercise
-    ? exercises![exerciseIndex + 1]
-    : undefined
-  const exerciseAfterNext = hasExerciseAfterNext
-    ? exercises![exerciseIndex + 2]
-    : undefined
+  const hasNextExercise = Boolean(currentExercise && exerciseIndex < exercises!.length - 1)
+  const hasExerciseAfterNext = Boolean(hasNextExercise && exerciseIndex < exercises!.length)
+  const nextExercise = hasNextExercise ? exercises![exerciseIndex + 1] : undefined
+  const exerciseAfterNext = hasExerciseAfterNext ? exercises![exerciseIndex + 2] : undefined
 
-  const [duration, setDuration] = useState<number>(
-    currentExercise?.duration || DEFAULT_DURATION
-  )
+  const [duration, setDuration] = useState<number>(currentExercise?.duration || DEFAULT_DURATION)
   const [timeLeft, setTimeLeft] = useState<number>(duration)
   const [startTime, setStartTime] = useState<number | false>(false)
   const [wasKeyPressed, setWasKeyPressed] = useState<boolean>(false)
@@ -51,6 +41,7 @@ const Timer = ({ exercises }: Props) => {
   const [playDing] = useSound(ding)
   const [playCling] = useSound(cling, { volume: 0.5 })
   const isDone = hasExercises ? !hasNextExercise && !timeLeft : null
+  const totalTime: number | undefined = hasExercises ? 0 : undefined
 
   useEffect(() => {
     const upHandler = ({ key }: KeyboardEvent): void => {
@@ -116,9 +107,7 @@ const Timer = ({ exercises }: Props) => {
     if (timeLeft === 0 || timeLeft === duration) {
       setStartTime(Date.now())
     } else {
-      setStartTime((isCurrentlyRunning) =>
-        isCurrentlyRunning ? false : Date.now() - (duration - timeLeft)
-      )
+      setStartTime((isCurrentlyRunning) => (isCurrentlyRunning ? false : Date.now() - (duration - timeLeft)))
     }
   }
 
@@ -143,25 +132,16 @@ const Timer = ({ exercises }: Props) => {
       <div className={styles.progressWrapper}>
         {shouldShowProgress && (
           <div
-            className={clsx(
-              styles.progress,
-              isRunningOut && styles.runningOut,
-              !startTime && styles.notRunning
-            )}
+            className={clsx(styles.progress, isRunningOut && styles.runningOut, !startTime && styles.notRunning)}
             style={{ width: `${percentageElapsed}%` }}
           />
         )}
       </div>
       <div className={styles.timer}>
         <div className={styles.helperText}>
-          Tap anywhere to{' '}
-          <span className={styles.helperAction}>{getHelperAction()}</span>
+          Tap anywhere to <span className={styles.helperAction}>{getHelperAction()}</span>
         </div>
-        {currentExercise && (
-          <div className={styles.currentExercise}>
-            {isDone ? 'Done!' : currentExercise.name}
-          </div>
-        )}
+        {currentExercise && <div className={styles.currentExercise}>{isDone ? 'Done!' : currentExercise.name}</div>}
         <input
           className={styles.secondsInput}
           title="Edit duration"
@@ -189,9 +169,7 @@ const Timer = ({ exercises }: Props) => {
                   <span className={styles.upNext}>Up next: </span>
                   {nextExercise?.name || 'Done!'}
                   <span className={styles.nextDuration}>
-                    {nextExercise?.duration
-                      ? ` (${splitSeconds(nextExercise.duration)}s)`
-                      : ''}
+                    {nextExercise?.duration ? ` (${splitSeconds(nextExercise.duration)}s)` : ''}
                   </span>
                 </div>
                 {exerciseAfterNext && (
@@ -199,9 +177,7 @@ const Timer = ({ exercises }: Props) => {
                     <span className={styles.upNext}>Then: </span>
                     {exerciseAfterNext?.name}
                     <span className={styles.nextDuration}>
-                      {exerciseAfterNext?.duration
-                        ? ` (${splitSeconds(exerciseAfterNext.duration)}s)`
-                        : ''}
+                      {exerciseAfterNext?.duration ? ` (${splitSeconds(exerciseAfterNext.duration)}s)` : ''}
                     </span>
                   </div>
                 )}

@@ -4,10 +4,7 @@ import Timer, { Set } from '../../components/Timer/Timer'
 const App = () => {
   useEffect(() => {
     const setAppHeight = () => {
-      document.documentElement.style.setProperty(
-        '--app-height',
-        `${window.innerHeight}px`
-      )
+      document.documentElement.style.setProperty('--app-height', `${window.innerHeight}px`)
     }
     setAppHeight()
     window.addEventListener('resize', setAppHeight)
@@ -99,9 +96,7 @@ const App = () => {
 
   return (
     <div>
-      <Timer
-      // exercises={sampleExercises}
-      />
+      <Timer exercises={sampleExercises} />
     </div>
   )
 }

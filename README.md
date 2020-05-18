@@ -13,7 +13,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 * Repeat sets
 * Whole workout time tracker
 * Total time displayed at the beginning of workout
-* Up next: more than one
 
 ## Available Scripts
 
