@@ -16,63 +16,63 @@ const App = () => {
   const sampleSet: Set[] = [
     {
       name: 'High Knee Runs',
-      duration: 45_000,
+      duration: 10_000,
     },
     {
       name: 'Rest',
-      duration: 15_000,
+      duration: 5_000,
     },
     {
       name: 'Switching Mountain Climbers',
-      duration: 45_000,
+      duration: 10_000,
     },
     {
       name: 'Rest',
-      duration: 15_000,
+      duration: 5_000,
     },
     {
       name: 'Jumping Jacks',
-      duration: 45_000,
+      duration: 10_000,
     },
     {
       name: 'Rest',
-      duration: 15_000,
+      duration: 5_000,
     },
     {
       name: 'Butt Kicks',
-      duration: 45_000,
+      duration: 10_000,
     },
     {
       name: 'Rest',
-      duration: 15_000,
+      duration: 5_000,
     },
     {
       name: 'In & Out (Open & Close)',
-      duration: 45_000,
+      duration: 10_000,
     },
     {
       name: 'Rest',
-      duration: 15_000,
+      duration: 5_000,
     },
     {
       name: 'Burpees',
-      duration: 45_000,
+      duration: 10_000,
     },
     {
       name: 'Rest',
-      duration: 15_000,
+      duration: 5_000,
     },
     {
       name: 'Bicycles',
-      duration: 45_000,
+      duration: 10_000,
     },
     {
       name: 'Rest',
-      duration: 15_000,
+      duration: 5_000,
     },
     {
       name: 'Side to Side Explosive Squats',
-      duration: 45_000,
+      duration: 10_000,
     },
   ]
 
@@ -96,7 +96,9 @@ const App = () => {
 
   return (
     <div>
-      <Timer exercises={sampleExercises} />
+      <Timer
+      // exercises={sampleExercises}
+      />
     </div>
   )
 }

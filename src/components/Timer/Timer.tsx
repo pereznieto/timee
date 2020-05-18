@@ -6,6 +6,7 @@ import ding from '../../assets/ding.mp3'
 import cling from '../../assets/cling.wav'
 import useSound from 'use-sound'
 import clsx from 'clsx'
+import { addTotalTime } from '../../utils/time'
 
 export interface Set {
   name: string
@@ -41,7 +42,14 @@ const Timer = ({ exercises }: Props) => {
   const [playDing] = useSound(ding)
   const [playCling] = useSound(cling, { volume: 0.5 })
   const isDone = hasExercises ? !hasNextExercise && !timeLeft : null
-  const totalTime: number | undefined = hasExercises ? 0 : undefined
+
+  const exercisesCompleted: Set[] | undefined = hasExercises ? exercises!.slice(0, exerciseIndex) : undefined
+  const totalTime: number | undefined = hasExercises ? addTotalTime(exercises!) : undefined
+  const timeElapsed: number | undefined = hasExercises
+    ? addTotalTime(exercisesCompleted!) + (duration - timeLeft)
+    : undefined
+
+  console.log({ totalTime, timeElapsed })
 
   useEffect(() => {
     const upHandler = ({ key }: KeyboardEvent): void => {
